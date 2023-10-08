@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 
@@ -11,9 +12,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public World world;
 
-    public Game() {
+    public Game() throws IOException {
         this.addKeyListener(this);
         this.setPreferredSize(new Dimension(width, height));
+
+        new Spritesheet();
 
         player = new Player(32,32);
         world = new World();
@@ -35,7 +38,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         //Desenha novos graficos
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.black);
+        g.setColor(new Color(0, 135 ,13));
         g.fillRect(0, 0, width, height);
 
         player.render(g);
@@ -45,7 +48,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Game game = new Game();
         JFrame frame = new JFrame();
